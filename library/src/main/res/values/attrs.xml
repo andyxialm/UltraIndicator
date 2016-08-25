@@ -1,0 +1,10 @@
+<resources>
+    <declare-styleable name="UltraIndicatorView">
+        <!-- change checked position, animation duration -->
+        <attr name="duration" format="integer"/>
+        <!-- checked color -->
+        <attr name="checkedColor" format="color"/>
+        <!-- unchecked color -->
+        <attr name="uncheckedColor" format="color"/>
+    </declare-styleable>
+</resources>

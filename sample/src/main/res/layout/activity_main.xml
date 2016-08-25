@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/darker_gray">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <cn.refactor.ultraindicator.lib.UltraIndicatorView
+        xmlns:uiv="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/ultra_indicator_view"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        uiv:checkedColor="@color/colorAccent"
+        uiv:uncheckedColor="@color/colorPrimary"
+        uiv:duration="300"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+</FrameLayout>

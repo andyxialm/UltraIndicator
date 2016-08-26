@@ -171,6 +171,14 @@ public class UltraIndicatorView extends View implements ViewPager.OnPageChangeLi
         return result;
     }
 
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        if (mValueAnimator != null && mValueAnimator.isRunning()) {
+            mValueAnimator.end();
+        }
+    }
+
     /**
      * start checked animation
      */

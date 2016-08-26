@@ -24,6 +24,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.View;
@@ -36,22 +38,23 @@ import android.view.animation.DecelerateInterpolator;
  */
 public class UltraIndicatorView extends View implements ViewPager.OnPageChangeListener {
 
+    private static final String KEY_INSTANCE_STATE = "InstanceState";
     private static final int DEFAULT_WIDTH = 50;
     private static final int DEFAULT_HEIGHT = 50;
-    private static final int DEFAULT_ANIM_DURATION = 300;
 
+    private static final int DEFAULT_ANIM_DURATION = 300;
     private static final int DEFAULT_CHECKED_COLOR = Color.WHITE;
     private static final int DEFAULT_UNCHECKED_COLOR = Color.parseColor("#555555");
-    private Paint mPaint;
 
+    private Paint mPaint;
     private int mCheckedColor;
     private int mUnCheckedColor;
-    private int mAnimDuration;
 
+    private int mAnimDuration;
     private int mCheckedPosition;
     private float mRadius, mCheckedRunningRadius;
-    private float mGap;
 
+    private float mGap;
     private ValueAnimator mValueAnimator;
 
     public UltraIndicatorView(Context context) {
@@ -214,6 +217,16 @@ public class UltraIndicatorView extends View implements ViewPager.OnPageChangeLi
         viewPager.addOnPageChangeListener(this);
     }
 
+    /**
+     * set checked position
+     * @param checkedPosition position
+     */
+    @SuppressWarnings("unused")
+    public void setCheckedPosition(int checkedPosition) {
+        mCheckedPosition = checkedPosition;
+        invalidate();
+    }
+
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -262,6 +275,26 @@ public class UltraIndicatorView extends View implements ViewPager.OnPageChangeLi
         int cg = (int) (sg * (1 - percent) + eg * percent);
         int cb = (int) (sb * (1 - percent) + eb * percent);
         return Color.argb(0xff, cr, cg, cb);
+    }
+
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(KEY_INSTANCE_STATE, super.onSaveInstanceState());
+        bundle.putInt(KEY_INSTANCE_STATE, mCheckedPosition);
+        return bundle;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        if (state instanceof Bundle) {
+            Bundle bundle = (Bundle) state;
+            mCheckedPosition = bundle.getInt(KEY_INSTANCE_STATE);
+            setCheckedPosition(mCheckedPosition);
+            super.onRestoreInstanceState(bundle.getParcelable(KEY_INSTANCE_STATE));
+            return;
+        }
+        super.onRestoreInstanceState(state);
     }
 
 }

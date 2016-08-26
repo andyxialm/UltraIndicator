@@ -20,8 +20,14 @@ A custom indicator for ViewPager.
 ~~~
 
 
+##### Java Code:
 ~~~ xml
 ultraIndicatorView.setupWithViewPager(viewPager);
+~~~
+
+##### Or
+~~~ xml
+ultraIndicatorView.setCheckedPosition(position);
 ~~~
 
 ### License

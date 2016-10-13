@@ -262,19 +262,22 @@ public class UltraIndicatorView extends View implements ViewPager.OnPageChangeLi
      * @return gradient color
      */
     @SuppressWarnings("unused")
-    private int getGradientColor(int startColor, int endColor, float percent) {
-        int sr = (startColor & 0xff0000) >> 0x10;
-        int sg = (startColor & 0xff00) >> 0x8;
-        int sb = (startColor & 0xff);
+    private static int getGradientColor(int startColor, int endColor, float percent) {
+        int startA = Color.alpha(startColor);
+        int startR = Color.red(startColor);
+        int startG = Color.green(startColor);
+        int startB = Color.blue(startColor);
 
-        int er = (endColor & 0xff0000) >> 0x10;
-        int eg = (endColor & 0xff00) >> 0x8;
-        int eb = (endColor & 0xff);
+        int endA = Color.alpha(endColor);
+        int endR = Color.red(endColor);
+        int endG = Color.green(endColor);
+        int endB = Color.blue(endColor);
 
-        int cr = (int) (sr * (1 - percent) + er * percent);
-        int cg = (int) (sg * (1 - percent) + eg * percent);
-        int cb = (int) (sb * (1 - percent) + eb * percent);
-        return Color.argb(0xff, cr, cg, cb);
+        int currentA = (int) (startA * (1 - percent) + endA * percent);
+        int currentR = (int) (startR * (1 - percent) + endR * percent);
+        int currentG = (int) (startG * (1 - percent) + endG * percent);
+        int currentB = (int) (startB * (1 - percent) + endB * percent);
+        return Color.argb(currentA, currentR, currentG, currentB);
     }
 
     @Override

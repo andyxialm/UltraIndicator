@@ -1,6 +1,6 @@
 #UltraIndicator
 
-A custom indicator for ViewPager.
+A custom indicator for ViewPager. Just adapt to six pages.
 
 ![](https://github.com/andyxialm/UltraIndicator/blob/master/art/screenshot.gif?raw=true)
 
